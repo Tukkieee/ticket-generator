@@ -77,16 +77,16 @@ export const Steps = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicket
       // step 1
       case 0:
         return (
-          <div className="flex flex-col-reverse md:flex-row gap-3 mt-8">
+          <div className="flex flex-col-reverse md:flex-row gap-3 mt-8 border justify-center rounded-3xl border-greenthree">
             <button
               onClick={() => setCurrentStep(0)}
-              className="px-6 w-full py-3 rounded-lg border border-greenone text-greenone hover:bg-primary/40 transition-colors whitespace-nowrap"
+              className="px-6 w-2/5 py-3 rounded-lg border border-greenone text-greenone hover:bg-primary/40 transition-colors whitespace-nowrap"
             >
               Cancel
             </button>
             <button
               onClick={next}
-              className="px-6 w-full py-3 rounded-lg bg-greenone hover:bg-borderone text-white transition-colors whitespace-nowrap"
+              className="px-6 w-2/5 py-3 rounded-lg bg-greenone hover:bg-borderone text-white transition-colors whitespace-nowrap"
             >
               Next
             </button>
