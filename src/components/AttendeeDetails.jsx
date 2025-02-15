@@ -41,7 +41,7 @@ export const AttendeeDetails = forwardRef(({ onSubmit }, ref) => {
       formData.append("upload_preset", "my-uploads");
 
       const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUD_NAME}/image/upload`,
+        `https://api.cloudinary.com/v1_1/dcoalw1ak/image/upload`,
         {
           method: "POST",
           body: formData,

@@ -12,6 +12,9 @@ A modern, responsive web application for generating and managing event tickets. 
 - 🎨 Modern UI with gradient effects
 - 📥 Downloadable tickets as PNG
 
+
+
+
 ## 🛠️ Tech Stack
 - [Next.js](https://nextjs.org/) – React framework
 - [TypeScript](https://www.typescriptlang.org/) – Type safety
