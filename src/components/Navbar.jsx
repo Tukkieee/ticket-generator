@@ -4,14 +4,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const Navigation = () => {
+export const Navbar= () => {
+  const [isOpen, setisOpen] = useState(false);
   const pathname = usePathname();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const navLinks = [
     { href: "/", label: "Events" },
     { href: "/tickets", label: "My Tickets" },
-    { href: "/project", label: "About Project" },
+    { href: "/about", label: "About Project" },
   ];
 
   return (
@@ -20,13 +20,13 @@ const Navigation = () => {
         {/* logo and mobile menu trigger */}
         <div 
           className="cursor-pointer md:cursor-default"
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          onClick={() => setisOpen(!isOpen)}
         >
           <Image src="/logo.svg" alt="logo" width={91} height={36} />
         </div>
 
         {/* Mobile dropdown menu */}
-        {isMenuOpen && (
+        {isOpen && (
           <div className="absolute top-full left-0 mt-2 w-48 bg-primary/95 border border-borderone rounded-xl py-2 md:hidden z-50">
             <ul className="flex flex-col text-subdued">
               {navLinks.map((link) => (
@@ -34,7 +34,7 @@ const Navigation = () => {
                   <Link
                     href={link.href}
                     className={`block px-4 py-2 ${pathname === link.href ? "text-white" : ""} hover:text-white`}
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => setisOpen(false)}
                   >
                     {link.label}
                   </Link>
@@ -64,7 +64,7 @@ const Navigation = () => {
       {/* button */}
       <Link href="/tickets">
         <button className="bg-white rounded-xl py-4 px-6 text-[#0A0C11] flex gap-2 items-center transition-[gap,colors] duration-300 hover:gap-3 group hover:bg-greenone border border-[#D5EA00]/10 hover:border-[#D9D9D9] hover:text-white h-[52px]">
-          <span>MY TICKETS</span>
+          <div>MY TICKETS</div>
           <Image
             src="/arrowright.svg"
             alt="arrow"
@@ -78,4 +78,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+

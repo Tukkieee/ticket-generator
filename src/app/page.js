@@ -1,9 +1,9 @@
 'use client'
 import { useRef, useState } from 'react';
-import Stepper from "@/components/Stepper";
-import TicketSelection from "@/components/TicketSelection";
-import AttendeeDetails from "@/components/AttendeeDetails";
-import BookedTicket from '@/components/BookedTicket';
+import {Steps} from "@/components/Steps";
+import {TicketSelection }from "@/components/TicketSelection";
+import {AttendeeDetails} from "@/components/AttendeeDetails";
+import {Tickets} from '@/components/Ticket';
 
 export default function Home() {
   const formRef = useRef();
@@ -36,13 +36,13 @@ export default function Home() {
     },
     {
       title: "Ready",
-      component: <BookedTicket />
+      component: <Tickets />
     }
   ];
 
   return (
-      <main className="z-20 relative w-full">
-        <Stepper 
+      <main className=" relative w-full">
+        <Steps 
           steps={steps} 
           onFormSubmit={handleFormSubmit} 
           canProceed={canProceed} 

@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
-import { eventDetails } from "@/constants/eventDetails";
+import { Details } from "@/components/Details";
 
-const EventTicket = ({ ticketDetails, isStep }) => {
+export const Ready = ({ ticketDetails, isStep }) => {
   if (!ticketDetails) {
     return null;
   }
@@ -11,7 +11,6 @@ const EventTicket = ({ ticketDetails, isStep }) => {
     <div className="w-full max-w-sm mx-auto font-roboto">
       <div className="bg-[#072C31] p-5 text-white relative border-2 border-greenone rounded-[20px] border-b-0">
         <div className="absolute top-0 z-10 left-0 w-full h-[30vh] bg-[radial-gradient(ellipse_at_top_center,rgba(36,160,181,0.3)_0%,rgba(36,160,181,0)_70%)]" />
-        {/* Top decorative corners with better blending */}
         <div className="absolute -top-[2px] -left-[2px] w-8 h-8">
           <div className="absolute w-full h-full bg-[#072C31] rounded-full" />
           <div
@@ -30,7 +29,7 @@ const EventTicket = ({ ticketDetails, isStep }) => {
           <div className="mb-8">
             {/* Event Title */}
             <h1 className="text-2xl sm:text-3xl md:text-5xl text-center font-roadrage mb-3">
-              {eventDetails.title}
+              {Details.title}
             </h1>
 
             {/* Location and Date */}
@@ -38,13 +37,13 @@ const EventTicket = ({ ticketDetails, isStep }) => {
               <div className="flex items-center text-center justify-center gap-2">
                 <span className="text-cyan-400 hidden sm:block">📍</span>
                 <span className="text-sm sm:text-base">
-                  {eventDetails.location}
+                  {Details.location}
                 </span>
               </div>
               <div className="flex items-center text-center justify-center gap-2">
                 <span className="text-cyan-400 hidden sm:block">📅</span>
                 <span className="text-sm sm:text-base">
-                  {eventDetails.date} | {eventDetails.time}
+                  {Details.date} | {Details.time}
                 </span>
               </div>
             </div>
@@ -179,4 +178,4 @@ const EventTicket = ({ ticketDetails, isStep }) => {
   );
 };
 
-export default EventTicket;
+// export default Ready;

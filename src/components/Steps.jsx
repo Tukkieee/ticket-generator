@@ -3,14 +3,41 @@
 import { useState, useEffect, useRef } from 'react';
 import { toPng } from 'html-to-image';
 
-const Stepper = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicketSelected, setShowTicketErrors }) => {
+export const Steps = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicketSelected, setShowTicketErrors }) => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isDownloading, setIsDownloading] = useState(false);
   const ticketRef = useRef(null);
 
+  useEffect(() => {
+    if (canProceed && currentStep === 1) {
+      setCurrentStep(prev => prev + 1);
+      setCanProceed(false);
+    }
+  }, [canProceed, currentStep, setCanProceed]);
+
   const progress = ((currentStep + 1) / steps.length) * 100;
 
-  const downloadTicket = async () => {
+
+  const GetTicket = async () => {
+    if (onFormSubmit) {
+      onFormSubmit();
+    }
+  };
+
+ 
+
+  const next = () => {
+    if (currentStep === 0) {
+      if (!isTicketSelected) {
+        setShowTicketErrors(true);
+      } else {
+        setCurrentStep(prev => prev + 1);
+        setShowTicketErrors(false);
+      }
+    }
+  };
+
+  const download = async () => {
     try {
       setIsDownloading(true);
       const element = ticketRef.current;
@@ -34,7 +61,7 @@ const Stepper = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicketSelec
 
       // Create download link
       const link = document.createElement('a');
-      const ticketDetails = JSON.parse(localStorage.getItem('ticketDetails') || '{}');
+      const ticketDetails = JSON.parse(localStorage.getItem('Details') || '{}');
       link.download = `ticket-${ticketDetails.name || 'event'}.png`;
       link.href = dataUrl;
       link.click();
@@ -42,30 +69,6 @@ const Stepper = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicketSelec
       console.error('Error downloading ticket:', err);
     } finally {
       setIsDownloading(false);
-    }
-  };
-
-  const handleGetTicket = async () => {
-    if (onFormSubmit) {
-      onFormSubmit();
-    }
-  };
-
-  useEffect(() => {
-    if (canProceed && currentStep === 1) {
-      setCurrentStep(prev => prev + 1);
-      setCanProceed(false);
-    }
-  }, [canProceed, currentStep, setCanProceed]);
-
-  const handleNext = () => {
-    if (currentStep === 0) {
-      if (!isTicketSelected) {
-        setShowTicketErrors(true);
-      } else {
-        setCurrentStep(prev => prev + 1);
-        setShowTicketErrors(false);
-      }
     }
   };
 
@@ -82,7 +85,7 @@ const Stepper = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicketSelec
               Cancel
             </button>
             <button
-              onClick={handleNext}
+              onClick={next}
               className="px-6 w-full py-3 rounded-lg bg-greenone hover:bg-borderone text-white transition-colors whitespace-nowrap"
             >
               Next
@@ -100,7 +103,7 @@ const Stepper = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicketSelec
               Back
             </button>
             <button
-              onClick={handleGetTicket}
+              onClick={GetTicket}
               className={`px-6 w-full py-3 rounded-lg bg-greenone hover:bg-borderone text-white transition-colors whitespace-nowrap`}
             >
               Get My Free Ticket
@@ -118,7 +121,7 @@ const Stepper = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicketSelec
               Book Another Ticket
             </button>
             <button
-              onClick={downloadTicket}
+              onClick={download}
               disabled={isDownloading} 
               className="px-6 w-full py-3 rounded-lg bg-greenone hover:bg-borderone text-white transition-colors whitespace-nowrap disabled:opacity-50 disabled:cursor-not-allowed"
             >
@@ -176,4 +179,3 @@ const Stepper = ({ steps, onFormSubmit, canProceed, setCanProceed, isTicketSelec
   );
 };
 
-export default Stepper;

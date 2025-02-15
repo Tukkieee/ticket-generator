@@ -1,4 +1,4 @@
-export const eventDetails = {
+export const Details = {
   title: "Techember Fest \"25",
   description: "Join us for an unforgettable experience at TechFest! Secure your spot now.",
   location: "Lagos, Nigeria",
